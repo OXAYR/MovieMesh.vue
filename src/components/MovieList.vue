@@ -4,7 +4,7 @@
     <ul class="grid grid-cols-4 gap-4 mt-4">
       <li
         v-for="item in movie"
-        :key="item._id"
+        :key="item.id"
         class="p-4 bg-white shadow-md rounded-lg flex flex-col justify-between"
       >
         <div class="p-2">
@@ -20,14 +20,14 @@
             Add to Cart
           </button> -->
           <button
-            @click="deleteItem(item._id)"
+            @click="deleteItem(item.id)"
             class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-medium rounded p-1 m-3"
           >
             Delete
           </button>
 
           <button
-            @click="editMovie(item)"
+            @click="editMovie(item.id)"
             class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-medium rounded p-1 m-3"
           >
             Edit
@@ -60,10 +60,13 @@ export default {
   },
   methods: {
     deleteItem(index) {
+      console.log(this.movie);
+      console.log("in the delete component", index);
       this.$emit("delete-movie", index);
     },
-    editItem(movie) {
-      this.$router.push({ path: `/edit/${movie._id}` });
+    editMovie(index) {
+      console.log(" in the parent edit movie ", index);
+      this.$router.push({ path: `/edit/${index}` });
     },
   },
 };

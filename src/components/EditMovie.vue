@@ -1,6 +1,6 @@
 <template>
   <div class="card px-8 py-11 max-w-full flex flex-col items-center">
-    <h2 class="font-bold text-center mb-4 text-xl">Edit Task</h2>
+    <h2 class="font-bold text-center mb-4 text-xl">Edit movie</h2>
     <div class="w-full max-w-md">
       <label class="block font-semibold mb-2">Title:</label>
       <input
@@ -16,7 +16,7 @@
 
       <button
         type="submit"
-        @click="updateTaskInStore"
+        @click="updateMovieInStore"
         class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
         Update Task
@@ -42,17 +42,14 @@ export default {
   methods: {
     ...mapActions(["updateMovie"]),
     updateMovieInStore() {
-      console.log("in thhe edit task----> ", this.id, this.editedMovie);
-      this.updateMovie({ id: this.id, updateTodo: this.editedMovie });
+      console.log("route params ", this.$route.params.id);
+      console.log("in thhe edit movie----> ", this.id, this.editedMovie);
+      this.updateMovie({ id: this.id, updateMovie: this.editedMovie });
       router.push("/home");
     },
   },
   computed: {
     ...mapGetters({ getTask: "getTasks" }),
-    tasks() {
-      // console.log(foundTask);
-      return this.getTask.find((task) => task.id == this.$route.params.id);
-    },
   },
 };
 </script>

@@ -13,11 +13,11 @@ export default new Vuex.Store({
   },
   getters: {
     getMovies(state) {
-      console.log(state.movies)
+      console.log(state.movie)
       return state.movie.movies;
     },
     getSelectedMovie(state) {
-      return state.movies.selectedMovie;
+      return state.movie.selectedMovie;
     },
   },
   mutations: {
@@ -36,7 +36,8 @@ export default new Vuex.Store({
     SET_TOKEN(state, payload){
       state.users.token = payload
     },
-    DELETE_MOVIE(state,id){
+    REMOVE_MOVIE(state,id){
+      console.log("in the mutatuion", id)
       state.movie.movies.splice(id,1)
     },
     UPDATE_MOVIE(state,id,data){
@@ -91,8 +92,8 @@ export default new Vuex.Store({
             'Content-Type': 'application/json'
           }
         };
-        await axios.delete(`/movie/${id}`,config)
         commit('REMOVE_MOVIE', id) 
+        await axios.delete(`/movies/${id}`,config)
       } catch (error) {
         console.error('Error deleting todo:', error)
       }
@@ -109,7 +110,7 @@ export default new Vuex.Store({
             'Content-Type': 'application/json'
           }
         };
-        await axios.put(`/movie/${id}`,updateMovie,config)
+        await axios.put(`/movies/${id}`,updateMovie,config)
         commit('Set_MOVIE', {id: id , data: updateMovie}) 
       } catch (error) {
         console.error('Error deleting todo:', error)
