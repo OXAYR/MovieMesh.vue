@@ -20,7 +20,7 @@ const routes = [
       {
         path:'createMovie',
         component: CreateMovie
-      }
+      },
       {
         path:'/edit/:id',
         component: EditMovie

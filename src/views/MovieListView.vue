@@ -1,5 +1,5 @@
 <template>
-  <MovieList :movie="Movies" />
+  <MovieList :movie="Movies" @delete-movie="deleteMovies" />
 </template>
 
 <script>
@@ -15,7 +15,11 @@ export default {
     ...mapGetters({ Movies: "getMovies" }),
   },
   methods: {
+    ...mapActions(["deleteMovie"]),
     ...mapActions({ fetch: "fetchMovies" }),
+    deleteMovies(index) {
+      this.deleteMovie(index);
+    },
   },
   created() {
     this.fetch();

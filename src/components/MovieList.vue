@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     deleteItem(index) {
-      this.$emit("delete-task", index);
+      this.$emit("delete-movie", index);
     },
     editItem(movie) {
       this.$router.push({ path: `/edit/${movie._id}` });

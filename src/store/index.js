@@ -3,7 +3,8 @@ import axios from 'axios';
 
 export default new Vuex.Store({
   state: {
-    movies: {
+    movie: {
+      movies:[]
     },
     users: {
       token:null,
@@ -13,7 +14,7 @@ export default new Vuex.Store({
   getters: {
     getMovies(state) {
       console.log(state.movies)
-      return state.movies;
+      return state.movie.movies;
     },
     getSelectedMovie(state) {
       return state.movies.selectedMovie;
@@ -25,8 +26,8 @@ export default new Vuex.Store({
     },
     SET_MOVIE_LIST(state, payload) {
       console.log('in the movie setter--->',payload.data.movies)
-      state.movies = payload.data.movies;
-      console.log('in the movie setter--->',state.movies)
+      state.movie.movies = payload.data.movies;
+      console.log('in the movie setter--->',state.movie.movies)
 
     },
     SET_SELECTED_MOVIE(state, payload) {
@@ -34,6 +35,12 @@ export default new Vuex.Store({
     },
     SET_TOKEN(state, payload){
       state.users.token = payload
+    },
+    DELETE_MOVIE(state,id){
+      state.movie.movies.splice(id,1)
+    },
+    UPDATE_MOVIE(state,id,data){
+      state.movie.movies.splice(id,1,data)
     }
   },
   actions: {
@@ -70,6 +77,42 @@ export default new Vuex.Store({
         commit('SET_MOVIE_LIST', data);
       } catch (error) {
         console.error('Error fetching movies:', error);
+      }
+    },
+
+    async deleteMovie({ commit }, id ) {
+      try {
+        console.log(id)
+        const token = this.state.users.token;
+        console.log('token in the fetch----> ', token)
+        const config = {
+          headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json'
+          }
+        };
+        await axios.delete(`/movie/${id}`,config)
+        commit('REMOVE_MOVIE', id) 
+      } catch (error) {
+        console.error('Error deleting todo:', error)
+      }
+    },
+
+    async updateMovie({ commit }, { id, updateMovie }) {
+      try {
+        console.log(id)
+        const token = this.state.users.token;
+        console.log('token in the fetch----> ', token)
+        const config = {
+          headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json'
+          }
+        };
+        await axios.put(`/movie/${id}`,updateMovie,config)
+        commit('Set_MOVIE', {id: id , data: updateMovie}) 
+      } catch (error) {
+        console.error('Error deleting todo:', error)
       }
     },
     
