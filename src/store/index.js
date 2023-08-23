@@ -6,7 +6,7 @@ export default new Vuex.Store({
     movie: {
       movies:[]
     },
-    users: {
+    user: {
       token:null,
     },
     validationErrors: {},
@@ -19,6 +19,10 @@ export default new Vuex.Store({
     getSelectedMovie(state) {
       return state.movie.selectedMovie;
     },
+    getUser(state){
+      console.log(state.user)
+      return state.user
+    }
   },
   mutations: {
     SET_VALIDATION_ERRORS(state, payload) {
@@ -33,8 +37,8 @@ export default new Vuex.Store({
     SET_SELECTED_MOVIE(state, payload) {
       state.movie.selectedMovie = payload;
     },
-    SET_TOKEN(state, payload){
-      state.users.token = payload
+    SET_USER(state, payload){
+      state.user = payload
     },
     REMOVE_MOVIE(state,id){
       console.log("in the mutatuion", id)
@@ -42,6 +46,9 @@ export default new Vuex.Store({
     },
     UPDATE_MOVIE(state,id,data){
       state.movie.movies.splice(id,1,data)
+    },
+    DELETE_USER(state){
+      state.user = null
     }
   },
   actions: {
@@ -85,7 +92,7 @@ export default new Vuex.Store({
       try {
         console.log(id)
         commit('REMOVE_MOVIE', id) 
-        const token = this.state.users.token;
+        const token = this.state.user.token;
         console.log('token in the fetch----> ', token)
         const config = {
           headers: {
@@ -103,7 +110,7 @@ export default new Vuex.Store({
       try {
         console.log("in the update movie----> ",indx)
         commit('Set_MOVIE', {id: indx , data: updateMovie}) 
-        const token = this.state.users.token;
+        const token = this.state.user.token;
         console.log('token in the update----> ', token)
         const config = {
           headers: {
@@ -119,7 +126,7 @@ export default new Vuex.Store({
     
     async fetchMovies({ commit }) {
       try {
-        const token = this.state.users.token;
+        const token = this.state.user.token;
         console.log('token in the fetch----> ', token)
         const config = {
           headers: {
@@ -139,8 +146,8 @@ export default new Vuex.Store({
       try {
         const { data } = await axios.post('/users/authenticate', payload);
         const token = data.data.token;
-        commit('SET_TOKEN', token);
-        console.log(data);
+        console.log("in tge authentication---->",token);
+        commit('SET_USER', data.data);
       } catch (error) {
         if (error.response && error.response.data.errors) {
           commit('SET_VALIDATION_ERRORS', error.response.data.errors);
@@ -158,6 +165,23 @@ export default new Vuex.Store({
           commit('SET_VALIDATION_ERRORS', error.response.data.errors);
         }
         console.error('Error registering user:', error);
+      }
+    },
+  
+    async updateUserPassword({ commit }, {id, newPassword}) {
+      try {
+        await axios.put(`/users/${id}/updatePassword`, { newPassword });
+        commit('SET_USER', null); 
+      } catch (error) {
+        console.error('Error updating password:', error);
+      }
+    },
+    async deleteUserAccount({ commit },id) {
+      try {
+        await axios.delete(`/users/${id}`);
+        commit('DELETE_USER', null); 
+      } catch (error) {
+        console.error('Error deleting account:', error);
       }
     },
   

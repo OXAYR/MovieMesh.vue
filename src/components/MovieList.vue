@@ -8,7 +8,7 @@
         class="p-4 bg-white shadow-md rounded-lg flex flex-col justify-between"
       >
         <div class="p-2">
-          <h2 class="text-lg font-semibold">{{ item.name }}</h2>
+          <div class="text-lg font-semibold">{{ item.name }}</div>
           <p class="text-gray-500 text-sm line-clamp-2">
             {{ item.released_on }}
           </p>

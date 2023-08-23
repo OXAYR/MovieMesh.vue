@@ -36,7 +36,7 @@ export default {
         name: "",
         released_on: "",
       },
-      id: this.$route.params.id, // Initialize id as null
+      id: this.$route.params.id,
     };
   },
   methods: {

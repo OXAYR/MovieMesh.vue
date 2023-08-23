@@ -9,10 +9,10 @@
         </div>
         <div class="flex">
           <router-link
-            to="/"
+            to="/userAccount"
             class="text-seaGreen shadow-sm hover:bg-dstoneBlack hover:text-white rounded p-3 ml-4 mt-1"
           >
-            Login
+            Account
           </router-link>
         </div>
       </div>
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "NavBar",
 
