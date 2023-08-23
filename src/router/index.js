@@ -22,7 +22,7 @@ const routes = [
         component: CreateMovie
       },
       {
-        path:'/edit/:movieId',
+        path:'/edit/:id',
         component: EditMovie
       }
       

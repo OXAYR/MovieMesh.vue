@@ -36,20 +36,24 @@ export default {
         name: "",
         released_on: "",
       },
-      id: this.$route.params.id,
+      id: this.$route.params.id, // Initialize id as null
     };
   },
   methods: {
     ...mapActions(["updateMovie"]),
     updateMovieInStore() {
       console.log("route params ", this.$route.params.id);
-      console.log("in thhe edit movie----> ", this.id, this.editedMovie);
-      this.updateMovie({ id: this.id, updateMovie: this.editedMovie });
+      console.log("in the edit movie ---->", this.id, this.editedMovie);
+      this.updateMovie({ indx: this.id, updateMovie: this.editedMovie });
       router.push("/home");
     },
   },
   computed: {
     ...mapGetters({ getTask: "getTasks" }),
   },
+  // beforeRouteUpdate(to, from, next) {
+  //   this.id = to.params.id; // Update id when route parameter changes
+  //   next();
+  // },
 };
 </script>
