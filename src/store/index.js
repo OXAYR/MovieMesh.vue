@@ -26,6 +26,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_VALIDATION_ERRORS(state, payload) {
+      console.log("in the errors, ", payload)
       state.validationErrors = payload;
     },
     SET_MOVIE_LIST(state, payload) {
@@ -159,12 +160,15 @@ export default new Vuex.Store({
     async registerUser({ commit }, payload) {
       try {
         const { data } = await axios.post('/users/register', payload);
-        console.log(data);
-      } catch (error) {
-        if (error.response && error.response.data.errors) {
-          commit('SET_VALIDATION_ERRORS', error.response.data.er);
+        console.log("in the register---> ",data.status);
+        if(data.status == 200){
+          commit('SET_VALIDATION_ERRORS', null)
         }
-        console.error('Error registering user:', error);
+      } catch (error) {
+        if (error.response.data.errors) {
+          commit('SET_VALIDATION_ERRORS', error.response.data.errors);
+        }
+        console.error('Error registering user:', error.response.data.errors);
       }
     },
   
