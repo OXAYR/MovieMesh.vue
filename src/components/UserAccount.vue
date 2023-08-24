@@ -14,10 +14,10 @@
       </div>
 
       <button
-        @click="updatePassword(user.user._id)"
+        @click="update(user.user._id)"
         class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
       >
-        Update Password
+        Edit
       </button>
 
       <button
@@ -35,18 +35,13 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "UserAccount",
-  data() {
-    return {
-      newPassword: "",
-    };
-  },
   computed: {
     ...mapGetters({ user: "getUser" }),
   },
   methods: {
-    updatePassword(index) {
+    update(index) {
       console.log("sending in params----->", index);
-      this.$router.push({ path: `/${index}/updatePassword` });
+      this.$router.push({ path: `/${index}/updateUser` });
     },
     ...mapActions(["deleteUserAccount"]),
     deleteAccount(index) {

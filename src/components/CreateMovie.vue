@@ -19,9 +19,8 @@
         v-model="prod.file"
         class="mt-4 p-2 flex border border-gray-300 rounded-md w-full"
       /> -->
-      <textarea
-        type="text"
-        placeholder="Enter Description"
+      <input
+        type="Date"
         v-model="movie.released_on"
         class="mt-4 h-32 border border-grey rounded-md w-full"
       />
@@ -47,7 +46,7 @@ export default {
     return {
       movie: {
         name: "",
-        released_on: " ",
+        released_on: Date,
       },
       error: "",
     };

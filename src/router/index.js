@@ -6,7 +6,7 @@ import MovieListView from '../views/MovieListView.vue'
 import CreateMovie from '../components/CreateMovie.vue'
 import EditMovie from '../components/EditMovie.vue'
 import UserAccount from '../components/UserAccount.vue'
-import EditPassword from '../components/EditPassword.vue'
+import EditUser from '../components/EditUser.vue'
 import store from '@/store'
 
 const routes = [
@@ -41,8 +41,8 @@ const routes = [
     component: UserAccount
   },
   {
-    path:'/:userId/updatePassword',
-    component: EditPassword
+    path:'/:userId/updateUser',
+    component: EditUser
   },
   {
     path: '/signup',

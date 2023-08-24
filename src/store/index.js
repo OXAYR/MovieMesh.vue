@@ -55,7 +55,7 @@ export default new Vuex.Store({
     
     async createMovies(_, payload) {
       try {
-        const token = this.state.users.token;
+        const token = this.state.user.token;
         console.log('token---->', token)
         const config = {
           headers: {
@@ -162,15 +162,15 @@ export default new Vuex.Store({
         console.log(data);
       } catch (error) {
         if (error.response && error.response.data.errors) {
-          commit('SET_VALIDATION_ERRORS', error.response.data.errors);
+          commit('SET_VALIDATION_ERRORS', error.response.data.er);
         }
         console.error('Error registering user:', error);
       }
     },
   
-    async updateUserPassword({ commit }, {id, newPassword}) {
+    async updateUser({ commit }, {id, name, password }) {
       try {
-        await axios.put(`/users/${id}/updatePassword`, { newPassword });
+        await axios.put(`/users/${id}/updateUser`, { name, password });
         commit('SET_USER', null); 
       } catch (error) {
         console.error('Error updating password:', error);
