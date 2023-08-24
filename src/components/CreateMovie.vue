@@ -1,38 +1,37 @@
 <template>
-  <div>
-    <h1 class="text-left text-xl font-bold font-san py-2">Create A Product</h1>
-    <div class="shadow-sm max-w-full bg-white rounded p-4">
-      <div class="flex flex-wrap justify-between">
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-center text-xl font-bold font-sans mb-4">
+        Create A Movie
+      </h1>
+      <div class="mb-4">
+        <label for="title" class="block text-sm font-medium text-gray-700"
+          >Title</label
+        >
         <input
           type="text"
-          placeholder="Enter title"
-          id="todo"
+          id="title"
           v-model="movie.name"
-          class="mt-4 p-2 flex border border-grey rounded-md w-full"
+          class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+          placeholder="Enter title"
         />
       </div>
-      <p v-if="error.length" class="text-red text-sm text-left">
-        {{ error }}
-      </p>
-      <!-- <input
-        type="url"
-        v-model="prod.file"
-        class="mt-4 p-2 flex border border-gray-300 rounded-md w-full"
-      /> -->
-      <input
-        type="Date"
-        v-model="movie.released_on"
-        class="mt-4 h-32 border border-grey rounded-md w-full"
-      />
-      <button
-        class="mt-4 px-12 py-2 bg-stoneBlack rounded-full"
-        @click="validate(movie)"
-      >
-        <p
-          class="text-white font-serif bg-black text-center hover:text-seaGreen"
+      <div class="mb-4">
+        <label for="released_on" class="block text-sm font-medium text-gray-700"
+          >Released On</label
         >
-          Create
-        </p>
+        <input
+          type="date"
+          id="released_on"
+          v-model="movie.released_on"
+          class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+        />
+      </div>
+      <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
+      <button
+        class="mt-4 w-full py-2 bg-blue rounded-full text-white font-serif hover:bg-black"
+      >
+        Create
       </button>
     </div>
   </div>

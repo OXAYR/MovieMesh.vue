@@ -13,7 +13,7 @@
             {{ item.released_on }}
           </p>
         </div>
-        <div><img :src="item.image" alt="productimage" /></div>
+        <!-- <div><img :src="item.image" alt="productimage" /></div> -->
         <div class="mt-4 flex justify-between items-center">
           <!-- <p class="text-lg font-semibold">Rs{{ moive.price }}</p> -->
           <!-- <button class="bg-stoneBlack text-white font-medium rounded p-2">

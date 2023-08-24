@@ -159,6 +159,7 @@ export default new Vuex.Store({
 
     async registerUser({ commit }, payload) {
       try {
+        console.log("Image of the user ", payload.profileImage)
         const { data } = await axios.post('/users/register', payload);
         console.log("in the register---> ",data.status);
         if(data.status == 200){
@@ -169,6 +170,7 @@ export default new Vuex.Store({
           commit('SET_VALIDATION_ERRORS', error.response.data.errors);
         }
         console.error('Error registering user:', error.response.data.errors);
+        console.error('Error registering user:', error);
       }
     },
   

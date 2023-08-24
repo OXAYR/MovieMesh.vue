@@ -1,10 +1,12 @@
 <template>
   <div>
-    <nav class="bg-black py-5 shadow-md fixed top-0 left-0 right-0 font-serif">
+    <nav
+      class="bg-navblue py-5 shadow-md fixed top-0 left-0 right-0 font-serif"
+    >
       <div class="flex justify-between items-center px-10">
         <div class="flex col-span-7">
           <router-link to="/">
-            <p class="font-semibold text-xl">MovieMesh</p>
+            <p class="font-semibold text-xl text-yellow">MovieMesh</p>
           </router-link>
         </div>
         <div class="flex">

@@ -12,7 +12,7 @@
 }
 
 body {
-  background-color: #02182b;
+  background-color: #002855;
 }
 
 nav {

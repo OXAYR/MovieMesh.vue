@@ -1,33 +1,40 @@
 <template>
   <div class="card mt-32 p-9 font-serif max-w-md mx-auto">
     <h2 class="text-3xl font-medium text-center">Sign Up</h2>
+    <form enctype="multipart/form-data">
+      <input
+        type="text"
+        v-model="form.name"
+        placeholder="Username"
+        class="mt-4 p-2 border border-gray-300 rounded-md w-full"
+      />
+      <input
+        type="email"
+        v-model="form.email"
+        placeholder="Email"
+        class="mt-4 p-2 border border-gray-300 rounded-md w-full"
+      />
+      \
+      <input
+        type="password"
+        v-model="form.password"
+        placeholder="Password"
+        class="mt-4 p-2 border border-gray-300 rounded-md w-full"
+      />
 
-    <input
-      type="text"
-      v-model="form.name"
-      placeholder="Username"
-      class="mt-4 p-2 border border-gray-300 rounded-md w-full"
-    />
-    <input
-      type="email"
-      v-model="form.email"
-      placeholder="Email"
-      class="mt-4 p-2 border border-gray-300 rounded-md w-full"
-    />
-    \
-    <input
-      type="password"
-      v-model="form.password"
-      placeholder="Password"
-      class="mt-4 p-2 border border-gray-300 rounded-md w-full"
-    />
-
-    <input
-      type="password"
-      placeholder="Confirm Password"
-      v-model="form.confirmPassword"
-      class="mt-4 p-2 border border-gray-300 rounded-md w-full"
-    />
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        v-model="form.confirmPassword"
+        class="mt-4 p-2 border border-gray-300 rounded-md w-full"
+      />
+      <!-- <input
+        type="file"
+        name="profileImage"
+        @change="onFileChange"
+        accept="image/*"
+      /> -->
+    </form>
     <p v-if="validationErrors" class="text-red-500 text-sm">
       {{ validationErrors }}
     </p>
@@ -56,6 +63,7 @@ export default {
         email: "",
         password: "",
         confirmPassword: "",
+        //profileImage: null,
       },
       error: [],
     };
@@ -66,6 +74,11 @@ export default {
   methods: {
     ...mapActions(["registerUser"]),
 
+    // onFileChange(event) {
+    //   this.form.profileImage = event.target.files[0];
+    //   console.log("In the component--->", this.form.profileImage);
+    // },
+
     async toStore(obj) {
       if (
         obj.email !== "" &&
@@ -73,6 +86,7 @@ export default {
         obj.name !== "" &&
         obj.confirmPassword !== ""
       ) {
+        console.log("In the component to store--->", obj.profileImage);
         await this.registerUser(obj);
         if (!this.validationErrors) router.push("/");
       }
