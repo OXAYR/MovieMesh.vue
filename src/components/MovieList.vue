@@ -20,17 +20,10 @@
             Add to Cart
           </button> -->
           <button
-            @click="deleteItem(item.id)"
-            class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-medium rounded p-1 m-3"
+            @click="addTicket(item)"
+            class="border border-bubble-gum text-white hover:bg-bubble-gum hover:text-white font-medium rounded p-1 m-3"
           >
-            Delete
-          </button>
-
-          <button
-            @click="editMovie(item.id)"
-            class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-medium rounded p-1 m-3"
-          >
-            Edit
+            Buy ticket
           </button>
         </div>
       </li>
@@ -59,15 +52,10 @@ export default {
     movie: {},
   },
   methods: {
-    deleteItem(index) {
-      console.log(this.movie);
-      console.log("in the delete component", index);
-      this.$emit("delete-movie", index);
+    addTicket(index) {
+      this.$emit("add-ticket", index);
     },
-    editMovie(index) {
-      console.log(" in the parent edit movie ", index);
-      this.$router.push({ path: `/edit/${index}` });
-    },
+    
   },
 };
 </script>

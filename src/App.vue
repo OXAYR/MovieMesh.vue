@@ -12,7 +12,7 @@
 }
 
 body {
-  background-color: #002855;
+  background-color: #001233;
 }
 
 nav {
@@ -21,10 +21,10 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #1f2b38;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #ffffff;
 }
 </style>

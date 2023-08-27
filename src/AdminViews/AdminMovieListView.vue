@@ -1,24 +1,24 @@
 <template>
-  <MovieList :movie="Movies" @add-ticket="addToCart" />
+  <AdminMovieList :movie="Movies" @delete-movie="deleteMovies" />
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import MovieList from "../components/MovieList.vue";
+import AdminMovieList from "../AdminComponents/AdminMovieList.vue";
 
 export default {
-  name: "MovieListView",
+  name: "AdminMovieListView",
   components: {
-    MovieList,
+    AdminMovieList,
   },
   computed: {
     ...mapGetters({ Movies: "getMovies" }),
   },
   methods: {
-    ...mapActions(["deleteMovie","createCart" ]),
+    ...mapActions(["deleteMovie"]),
     ...mapActions({ fetch: "fetchMovies" }),
-    addToCart(index) {
-      this.createCart(index);
+    deleteMovies(index) {
+      this.deleteMovie(index);
     },
   },
   created() {
@@ -26,3 +26,4 @@ export default {
   },
 };
 </script>
+

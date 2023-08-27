@@ -15,9 +15,11 @@ module.exports = {
         'borderBlue': 'rgb(0, 22, 42)',
         "darkBlue": '#001233',
         "navblue":"#001845",
+        "bluenew":"#050f21",
       "blue":"#001c55",
-      "lightBlue":"#0a2472 ",
-      "yellow":"#ef233c"
+      "lightBlue":"#0c2d8e",
+      "lightestBlue":"#1340c6 ",
+      "red":"#ef233c"
       },
   },
   plugins: [],

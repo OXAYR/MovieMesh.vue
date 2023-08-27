@@ -1,15 +1,40 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import AdminView from '../AdminViews/AdminView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignUpView from '../views/SignUpView.vue'
+import DashBoardView from '../AdminViews/DashBoardView.vue'
+import AdminMovieListView from '../AdminViews/AdminMovieListView.vue'
+import HomeView from '../views/HomeView.vue'
 import MovieListView from '../views/MovieListView.vue'
-import CreateMovie from '../components/CreateMovie.vue'
-import EditMovie from '../components/EditMovie.vue'
+import EditMovie from '../AdminComponents/EditMovie.vue'
 import UserAccount from '../components/UserAccount.vue'
 import EditUser from '../components/EditUser.vue'
+import CartView from '../views/CartView.vue'
 import store from '@/store'
 
 const routes = [
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
+    children: [
+      {
+        path: '',
+        name: DashBoardView,
+        component: DashBoardView
+      },
+      {
+        path:'AdminMovieListView',
+        component: AdminMovieListView
+      },
+      {
+        path:'/edit/:id',
+        component: EditMovie
+      }
+      
+    ]
+    
+  },
   {
     path: '/home',
     name: 'home',
@@ -21,18 +46,13 @@ const routes = [
         component: MovieListView
       },
       {
-        path:'createMovie',
-        component: CreateMovie
-      },
-      {
-        path:'/edit/:id',
-        component: EditMovie
+        path:'cart',
+        component: CartView
       }
       
     ]
     
   },
-  
   {
     path: '/',
     name: 'login',

@@ -9,6 +9,9 @@ export default new Vuex.Store({
     user: {
       token:null,
     },
+    cart:{
+
+    },
     validationErrors: {},
   },
   getters: {
@@ -22,6 +25,9 @@ export default new Vuex.Store({
     getUser(state){
       console.log(state.user)
       return state.user
+    },
+    getCart(state){
+      return state.cart
     }
   },
   mutations: {
@@ -50,6 +56,14 @@ export default new Vuex.Store({
     },
     DELETE_USER(state){
       state.user = null
+    },
+    SET_CART(state, cart){
+      console.log("Cart in the setter ", cart)
+     state.cart = cart  ;
+    },
+    DELETE_CART_EL(state, id){
+      console.log("Cart in the setter ", id)
+     state.cart.splice(id,1);
     }
   },
   actions: {
@@ -192,6 +206,67 @@ export default new Vuex.Store({
     },
   
     
+    async createCart(_, payload) {
+      try {
+        const userId = this.state.user.user._id;
+        const token = this.state.user.token;
+        console.log("user in the cart------>", this.state.user)
+        console.log('token---->', token, userId)
+        console.log('payload---->', payload , payload.released_on)
+        const {id, released_on} = payload
+        const newPayload = {movieId: id, userId: userId, date:released_on}
+        console.log("In the cart new payload------> ",newPayload)
+        const config = {
+          headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json'
+          }
+        };
+        const { data } = await axios.post('/cart', newPayload, config);
+        console.log('Cart created:', data);
+      } catch (error) {
+        console.error('Error creating movie:', error);
+      }
+    },
+    
+    async getCart({ commit }) {
+      try {
+        const token = this.state.user.token;
+        console.log('token in the fetch----> ', token)
+        const config = {
+          headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json'
+          }
+        };
+        const { data } = await axios.get(`/cart/${this.state.user.user._id}`,config);
+        console.log("in the get cart----> ",data.data.cartItems)
+        commit('SET_CART', data.data.cartItems);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    },
+
+
+    async deleteCartEl({ commit }, id ) {
+      try {
+        console.log(id)
+       
+        const token = this.state.user.token;
+        console.log('token in the delete----> ', token)
+        const config = {
+          headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json'
+          }
+        };
+        await axios.delete(`/cart/${id}`,config)
+        commit('DELETE_CART_EL', id) 
+      } catch (error) {
+        console.error('Error deleting todo:', error)
+      }
+    },
+
   },
   modules: {},
 });
