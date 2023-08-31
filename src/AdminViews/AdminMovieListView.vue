@@ -1,7 +1,6 @@
 <template>
-  <AdminMovieList :movie="Movies" @delete-movie="deleteMovies" />
+  <AdminMovieList :movie="allMovies" @delete-movie="deleteMovies" />
 </template>
-
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AdminMovieList from "../AdminComponents/AdminMovieList.vue";
@@ -12,18 +11,17 @@ export default {
     AdminMovieList,
   },
   computed: {
-    ...mapGetters({ Movies: "getMovies" }),
+    ...mapGetters({allMovies: "movies/getMovies"}), 
   },
   methods: {
-    ...mapActions(["deleteMovie"]),
-    ...mapActions({ fetch: "fetchMovies" }),
+    ...mapActions("movies", ["deleteMovie", "fetchMovies"]), 
+
     deleteMovies(index) {
       this.deleteMovie(index);
     },
   },
   created() {
-    this.fetch();
+    this.fetchMovies();
   },
 };
 </script>
-

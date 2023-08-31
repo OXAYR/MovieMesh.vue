@@ -1,7 +1,6 @@
 <template>
-  <MovieList :movie="Movies" @add-ticket="addToCart" />
+  <MovieList :movie="allMovies" @add-ticket="addToCart" />
 </template>
-
 <script>
 import { mapGetters, mapActions } from "vuex";
 import MovieList from "../components/MovieList.vue";
@@ -12,17 +11,18 @@ export default {
     MovieList,
   },
   computed: {
-    ...mapGetters({ Movies: "getMovies" }),
+    ...mapGetters({allMovies: "movies/getMovies"}), 
   },
   methods: {
-    ...mapActions(["deleteMovie","createCart" ]),
-    ...mapActions({ fetch: "fetchMovies" }),
+    ...mapActions("movies", ["deleteMovie" , "fetchMovies"]), 
+    ...mapActions('cart', ['createCart']),
+
     addToCart(index) {
       this.createCart(index);
     },
   },
   created() {
-    this.fetch();
+    this.fetchMovies();
   },
 };
 </script>

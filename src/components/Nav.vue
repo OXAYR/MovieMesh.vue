@@ -6,7 +6,7 @@
       <div class="flex justify-between items-center px-10">
         <div class="flex col-span-7">
           <router-link to="/">
-            <p class="font-semibold text-xl text-yellow">MovieMesh</p>
+            <p class="font-semibold text-xl text-silver">MovieMesh</p>
           </router-link>
         </div>
         <div class="flex">

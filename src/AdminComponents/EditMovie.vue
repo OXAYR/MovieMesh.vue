@@ -1,5 +1,5 @@
 <template>
-  <div class="card px-8 py-11 max-w-full flex flex-col items-center">
+  <div class="card px-8 py-11 max-w-full flex flex-col items-center bg-blue text-silver">
     <h2 class="font-bold text-center mb-4 text-xl">Edit movie</h2>
     <div class="w-full max-w-md">
       <label class="block font-semibold mb-2">Title:</label>
@@ -28,36 +28,27 @@
 
 <script>
 import router from "@/router";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions} from "vuex";
+
 export default {
   name: "EditMovie",
   data() {
     return {
       editedMovie: {
         name: "",
-        released_on: Date,
+        released_on: new Date(), 
       },
       id: this.$route.params.id,
     };
   },
-  props:{
-
-  },
   methods: {
-    ...mapActions(["updateMovie"]),
+    ...mapActions("movies", ["updateMovie"]), 
     updateMovieInStore() {
-      console.log("route params ", this.$route.params.id);
-      console.log("in the edit movie ---->", this.id, this.editedMovie);
-      this.updateMovie({ indx: this.id, updateMovie: this.editedMovie });
+      console.log("Route params: ", this.$route.params.id);
+      console.log("Edited movie: ", this.editedMovie);
+      this.updateMovie({ id: this.id, data: this.editedMovie }); 
       router.push("/home");
     },
   },
-  computed: {
-    ...mapGetters({ getTask: "getTasks" }),
-  },
-  // beforeRouteUpdate(to, from, next) {
-  //   this.id = to.params.id; // Update id when route parameter changes
-  //   next();
-  // },
 };
 </script>

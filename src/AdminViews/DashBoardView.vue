@@ -4,26 +4,33 @@
       Welcome Back, Admin
     </h1>
     <p class="text-sm font-medium text-silver">
-      Here you can create, edit and delete products
+      Here you can create, edit and delete movies
     </p>
   </div>
 
-  <div>
+  <div class="flex justify-between">
     <CreateMovie />
+    <UserView />
   </div>
-
+  
   <div>
     <AdminMovieListView />
   </div>
 </template>
+
+
+
+
 <script>
 import CreateMovie from "@/AdminComponents/CreateMovie.vue";
 import AdminMovieListView from "./AdminMovieListView.vue";
+import UserView from './UserView.vue';
 export default {
   name: "DashBoardView",
   components: {
     CreateMovie,
     AdminMovieListView,
+    UserView
   },
 };
 </script>

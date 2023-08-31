@@ -47,14 +47,14 @@
 </template>
 
 <script>
-import router from "@/router";
 import { mapActions, mapState } from "vuex";
+import router from "@/router";
+
 export default {
   name: "SignUp",
   props: {
     msg: String,
   },
-
   data() {
     return {
       form: {
@@ -62,21 +62,15 @@ export default {
         email: "",
         password: "",
         confirmPassword: "",
-        //profileImage: null,
       },
       error: [],
     };
   },
   computed: {
-    ...mapState(["validationErrors"]),
+    ...mapState("user", ["validationErrors"]), 
   },
   methods: {
-    ...mapActions(["registerUser"]),
-
-    // onFileChange(event) {
-    //   this.form.profileImage = event.target.files[0];
-    //   console.log("In the component--->", this.form.profileImage);
-    // },
+    ...mapActions("user", ["registerUser"]), 
 
     async toStore(obj) {
       if (

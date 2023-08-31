@@ -1,45 +1,30 @@
 <template>
-  <div class="mx-16 my-32">
+  <div class="mx-16 my-32 text-silver">
     <h1 class="font-bold text-3xl text-left">Movies</h1>
     <ul class="grid grid-cols-4 gap-4 mt-4">
       <li
         v-for="item in movie"
         :key="item.id"
-        class="p-4 bg-white shadow-md rounded-lg flex flex-col justify-between"
+        class="p-4 bg-blue shadow-md rounded-lg flex flex-col justify-between"
       >
         <div class="p-2">
           <div class="text-lg font-semibold">{{ item.name }}</div>
-          <p class="text-gray-500 text-sm line-clamp-2">
-            {{ item.released_on }}
-          </p>
+          <p class="text-gray-500 text-sm line-clamp-2">{{ item.released_on }}</p>
         </div>
-        <!-- <div><img :src="item.image" alt="productimage" /></div> -->
+        <div><img src="../assets/Netflix.svg" alt="movieimage"  class="ml-54"/></div> 
         <div class="mt-4 flex justify-between items-center">
-          <!-- <p class="text-lg font-semibold">Rs{{ moive.price }}</p> -->
-          <!-- <button class="bg-stoneBlack text-white font-medium rounded p-2">
-            Add to Cart
-          </button> -->
           <button
             @click="addTicket(item)"
-            class="border border-bubble-gum text-white hover:bg-bubble-gum hover:text-white font-medium rounded p-1 m-3"
+            class="border border-silver text-white hover:bg-silver hover:text-blue font-medium rounded p-1 m-3"
           >
-            Buy ticket
+            Buy Ticket
           </button>
         </div>
       </li>
     </ul>
-    <!-- <div v-else class="flex flex-col items-center justify-center text-center">
-      <div>
-         <img
-          src="../assets/undraw_no_data_re_kwbl.svg"
-          alt="no products"
-          class="max-w-full h-auto max-h-48 mx-auto drop-shadow-lg"
-        /> -->
-    <!-- </div>
-      <p class="font-semibold mt-2">No Products Available</p>
-    </div> -->
   </div>
 </template>
+
 
 <script>
 // import EditProduct from "./EditProduct.vue";

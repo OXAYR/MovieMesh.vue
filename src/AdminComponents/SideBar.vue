@@ -13,8 +13,13 @@
       >
       <router-link
         to="/admin/AdminMovieListView"
-        class="mb-2 text-silver rounded-xl py-3 px-12 block font-bold text-xl"
+        class="mb-7 text-silver rounded-xl py-3 px-12 block font-bold text-xl"
         >Movies</router-link
+      >
+      <router-link
+        to="/admin/users"
+        class="mb-2 text-silver rounded-xl py-3 px-12 block font-bold text-xl"
+        >Users</router-link
       >
     </div>
   </div>

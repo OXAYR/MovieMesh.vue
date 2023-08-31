@@ -21,7 +21,7 @@
       class="mt-4 px-28 py-2 bg-blue text-white hover:bg-lightBlue rounded-full"
       @click="toValidate(formLogin)"
     >
-      <p class="text-black font-serif text-center">Login</p>
+      <p class="text-white font-serif text-center">Login</p>
     </button>
 
     <router-link to="/signup" class="block mt-2">
@@ -51,17 +51,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["authenticateUser"]),
+    ...mapActions("user", ["authenticateUser"]), 
     async toValidate(obj) {
-      if (obj.email != 0 && obj.password != 0) {
+      if (obj.email !== "" && obj.password !== "") {
         await this.authenticateUser(obj);
-    
-          this.$router.push("/admin");
+
+        this.$router.push("/admin");
       }
     },
   },
   computed: {
-    ...mapState(["validationErrors"]),
+    ...mapState("user", ["validationErrors"]), 
   },
 };
 </script>

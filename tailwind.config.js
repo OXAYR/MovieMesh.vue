@@ -4,6 +4,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
+        'black':'#000000',
         'white': '#ffffff',
         'purple': '#3f3cbb',
         'midnight': '#121063',
@@ -19,7 +20,8 @@ module.exports = {
       "blue":"#001c55",
       "lightBlue":"#0c2d8e",
       "lightestBlue":"#1340c6 ",
-      "red":"#ef233c"
+      "red":"#ef233c",
+      "grey":"#dedede",
       },
   },
   plugins: [],
