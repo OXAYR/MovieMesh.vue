@@ -1,6 +1,5 @@
 <template>
   <div class="mx-32 my-32  text-silver ">
-    {{ crt }}
     <h1 class="font-bold text-3xl text-left">MY CART ({{ crt.length }})</h1>
     <ul
       v-if="crt.length"
@@ -18,7 +17,7 @@
         <div class="col-span-3 flex flex-col items-end py-2 mt-4">
           <button
             @click="removeItem(item.movieId)"
-            class="text-white bg-darkBlue font-medium text-md text-center rounded-full px-2 m-3"
+            class="text-darkBlue bg-silver font-medium text-md text-center rounded-full px-2 m-3"
           >
             x
           </button>

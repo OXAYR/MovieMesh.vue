@@ -5,17 +5,24 @@
     >
       <div class="flex justify-between items-center px-10">
         <div class="flex col-span-7">
-          <router-link to="/">
+          <router-link to="/home">
             <p class="font-semibold text-xl text-silver">MovieMesh</p>
           </router-link>
         </div>
         <div class="flex">
           <router-link
-            to="/userAccount"
-            class="text-seaGreen shadow-sm hover:bg-dstoneBlack hover:text-white rounded p-3 ml-4 mt-1"
+            to="home/userAccount"
+            class="text-silver shadow-sm hover:bg-blue hover:text-white rounded p-3 ml-4 mt-1"
           >
             Account
           </router-link>
+          <router-link
+            to="home/cart"
+            class="text-silver shadow-sm hover:bg-blue hover:text-white rounded p-3 ml-4 mt-1"
+          >
+            cart
+          </router-link>
+
         </div>
       </div>
     </nav>

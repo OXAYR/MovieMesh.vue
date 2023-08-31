@@ -41,7 +41,7 @@ export default {
   methods: {
     update(index) {
       console.log("sending in params----->", index);
-      this.$router.push({ path: `/${index}/updateUser` });
+      this.$router.push({ path: `/home/${index}/updateUser` });
     },
     ...mapActions("user", ["deleteUserAccount"]), 
     deleteAccount(index) {

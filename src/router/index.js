@@ -58,7 +58,15 @@ const routes = [
       {
         path:'cart',
         component: CartView
-      }
+      },
+      {
+        path:'userAccount',
+        component: UserAccount
+      },
+      {
+        path:':userId/updateUser',
+        component: EditUser
+      },
       
     ],
     meta: {
@@ -73,14 +81,7 @@ const routes = [
     name: 'login',
     component: LoginView
   },
-  {
-    path:'/userAccount',
-    component: UserAccount
-  },
-  {
-    path:'/:userId/updateUser',
-    component: EditUser
-  },
+  
   {
     path: '/signup',
     name: 'SignUp',
@@ -120,29 +121,9 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    next(); // Proceed to the route if no authentication is required
+    next();
   }
 });
-
-
-  // if (to.matched.some(record => record.meta.requiresAdmin)) {
-  //   if (isAdmin) {
-  //     next();
-  //   } else {
-  //     next({ name: 'home' });
-  //   }
-  // } else if (to.matched.some(record => record.meta.requiresUser)) {
-  //   if (isUser) {
-  //     next();
-  //   } else {
-  //     next({ name: 'admin' });
-  //   }
-  // } else {
-  //   next();
-  // }
-// });
-
-
 
 
 export default router
