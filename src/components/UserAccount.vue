@@ -5,24 +5,24 @@
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Name:</label>
-        <p class="bg-gray-100 p-2 rounded">{{ user.user.name }}</p>
+        <p class="bg-grey p-2 rounded">{{ user.user.name }}</p>
       </div>
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Email:</label>
-        <p class="bg-gray-100 p-2 rounded">{{ user.user.email }}</p>
+        <p class="bg-grey p-2 rounded">{{ user.user.email }}</p>
       </div>
 
       <button
         @click="update(user.user._id)"
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
+        class="bg-blue text-white px-4 py-2 rounded hover:bg-blue mr-2"
       >
         Edit
       </button>
 
       <button
         @click="deleteAccount(user.user._id)"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        class="bg-red text-white px-4 py-2 rounded hover:bg-red"
       >
         Delete Account
       </button>
@@ -36,22 +36,20 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "UserAccount",
   computed: {
-    ...mapGetters({ user: "getUser" }),
+    ...mapGetters({user: "user/getUser"}), 
   },
   methods: {
     update(index) {
       console.log("sending in params----->", index);
-      this.$router.push({ path: `/${index}/updateUser` });
+      this.$router.push({ path: `/home/${index}/updateUser` });
     },
-    ...mapActions(["deleteUserAccount"]),
+    ...mapActions("user", ["deleteUserAccount"]), 
     deleteAccount(index) {
       this.deleteUserAccount(index);
-      this.$route.push("/");
+      this.$router.push("/");
     },
   },
 };
 </script>
-
 <style>
-/* You can add custom styles here if needed */
 </style>

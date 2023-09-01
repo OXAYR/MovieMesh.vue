@@ -6,26 +6,26 @@
       <div class="mb-4">
         <label class="block font-semibold mb-2">Name:</label>
         <input
-          class="bg-gray-100 p-2 rounded w-full text-center"
+          class="bg-grey p-2 rounded w-full text-center"
           v-model="name"
         />
       </div>
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Email:</label>
-        <p class="bg-gray-100 p-2 rounded">{{ email }}</p>
+        <p class="bg-grey p-2 rounded">{{ email }}</p>
       </div>
       <div class="mb-4">
         <label class="block font-semibold mb-2">New Password</label>
         <input
-          class="bg-gray-100 p-2 rounded text-center w-full"
+          class="bg-grey p-2 rounded text-center w-full"
           v-model="newPassword"
         />
       </div>
 
       <button
         @click="updateUserEvent(indx)"
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
+        class="bg-blue text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
       >
         Update
       </button>
@@ -34,20 +34,19 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import store from "@/store";
 
 export default {
   name: "EditPassword",
   data() {
     return {
       newPassword: "",
-      name: store.state.user.user.name,
-      email: store.state.user.user.email,
+      name: this.$store.state.user.user.name,
+      email: this.$store.state.user.user.email,
       userId: this.$route.params.userId,
     };
   },
   methods: {
-    ...mapActions(["updateUser"]),
+    ...mapActions("user", ["updateUser"]), 
 
     async updateUserEvent() {
       console.log("In the update password --->", this.userId);

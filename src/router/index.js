@@ -1,15 +1,50 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import AdminView from '../AdminViews/AdminView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignUpView from '../views/SignUpView.vue'
+import DashBoardView from '../AdminViews/DashBoardView.vue'
+import AdminMovieListView from '../AdminViews/AdminMovieListView.vue'
+import HomeView from '../views/HomeView.vue'
 import MovieListView from '../views/MovieListView.vue'
-import CreateMovie from '../components/CreateMovie.vue'
-import EditMovie from '../components/EditMovie.vue'
+import EditMovie from '../AdminComponents/EditMovie.vue'
 import UserAccount from '../components/UserAccount.vue'
+import Users from '../AdminComponents/Users.vue'
 import EditUser from '../components/EditUser.vue'
+import CartView from '../views/CartView.vue'
 import store from '@/store'
 
 const routes = [
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
+    children: [
+      {
+        path: '',
+        name: DashBoardView,
+        component: DashBoardView
+      },
+      {
+        path:'AdminMovieListView',
+        component: AdminMovieListView
+      },
+      {
+        path:'/edit/:id',
+        component: EditMovie
+      },
+      {
+        path:'users',
+        component:Users
+      }
+      
+    ],
+    meta: {
+      adminAuth: true,
+      requiresAuth: true,
+      userAuth: false,  
+    }
+    
+  },
   {
     path: '/home',
     name: 'home',
@@ -21,31 +56,32 @@ const routes = [
         component: MovieListView
       },
       {
-        path:'createMovie',
-        component: CreateMovie
+        path:'cart',
+        component: CartView
       },
       {
-        path:'/edit/:id',
-        component: EditMovie
-      }
+        path:'userAccount',
+        component: UserAccount
+      },
+      {
+        path:':userId/updateUser',
+        component: EditUser
+      },
       
-    ]
+    ],
+    meta: {
+      adminAuth: false,
+      requiresAuth: true,
+      userAuth: true,  
+    }
     
   },
-  
   {
     path: '/',
     name: 'login',
     component: LoginView
   },
-  {
-    path:'/userAccount',
-    component: UserAccount
-  },
-  {
-    path:'/:userId/updateUser',
-    component: EditUser
-  },
+  
   {
     path: '/signup',
     name: 'SignUp',
@@ -61,27 +97,33 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+ 
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.name === 'home')) {
-//     console.log('home route authentication');
-//     console.log('token------->',store.state.user.token)
-    
-//     if (store.state.user.token) {
-//       console.log('User is authenticated');
-//       next(); 
-//     } else {
-//       console.log('User is not authenticated');
-//       next({ name: 'login' });
-//     }
-//   } 
-//   else{
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const authUser = store.getters['user/getUser']; 
+    console.log("in the navigation guards------>",authUser.user.userRole)
 
-
-
+    if (!authUser.user || !authUser.token) {
+      next({ name: 'login' });
+    } else if (to.meta.adminAuth) {
+      if (authUser.user.userRole.toLowerCase() === 'admin') {
+        next();
+      } else {
+        next('/home');
+      }
+    } else if (to.meta.userAuth) {
+      if (authUser.user.userRole.toLowerCase() === 'user') {
+        next();
+      } else {
+        console.log("I am in admin");
+        next('/admin');
+      }
+    }
+  } else {
+    next();
+  }
+});
 
 
 export default router

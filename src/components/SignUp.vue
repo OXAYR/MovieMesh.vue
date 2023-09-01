@@ -14,7 +14,6 @@
         placeholder="Email"
         class="mt-4 p-2 border border-gray-300 rounded-md w-full"
       />
-      \
       <input
         type="password"
         v-model="form.password"
@@ -35,11 +34,11 @@
         accept="image/*"
       /> -->
     </form>
-    <p v-if="validationErrors" class="text-red-500 text-sm">
+    <p v-if="validationErrors" class="text-red text-sm">
       {{ validationErrors }}
     </p>
     <button
-      class="mt-4 px-40 py-2 text-white bg-blue-950 hover:bg-blue-800 rounded-full"
+      class="mt-4 px-40 py-2 text-white bg-blue hover:bg-lightBlue rounded-full"
       @click="toStore(form)"
     >
       Register
@@ -48,14 +47,14 @@
 </template>
 
 <script>
-import router from "@/router";
 import { mapActions, mapState } from "vuex";
+import router from "@/router";
+
 export default {
   name: "SignUp",
   props: {
     msg: String,
   },
-
   data() {
     return {
       form: {
@@ -63,21 +62,15 @@ export default {
         email: "",
         password: "",
         confirmPassword: "",
-        //profileImage: null,
       },
       error: [],
     };
   },
   computed: {
-    ...mapState(["validationErrors"]),
+    ...mapState("user", ["validationErrors"]), 
   },
   methods: {
-    ...mapActions(["registerUser"]),
-
-    // onFileChange(event) {
-    //   this.form.profileImage = event.target.files[0];
-    //   console.log("In the component--->", this.form.profileImage);
-    // },
+    ...mapActions("user", ["registerUser"]), 
 
     async toStore(obj) {
       if (
